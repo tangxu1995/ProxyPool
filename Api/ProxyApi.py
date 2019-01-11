@@ -9,8 +9,6 @@ def get_conn():
     if not hasattr(g, 'redis'):
         g.redis = RedisClient()
     return g.redis
-    # client = RedisClient()
-    # return client
 
 
 @app.route('/')
@@ -22,7 +20,7 @@ def index():
 def get_proxy():
     """
     获取随机可用代理
-    :return:
+    :return: 随机代理
     """
     conn = get_conn()
     return conn.random()

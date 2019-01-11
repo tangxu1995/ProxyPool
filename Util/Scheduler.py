@@ -16,21 +16,20 @@ class Scheduler(object):
     def schedule_tester(self):
         """
         定时检测代理
-        :return:
         """
         tester = CheckProxy()
         while True:
+            print('测试器开始运行~')
             tester.run()
             time.sleep(20)
 
     def schedule_getter(self):
         """
         定时获取代理
-        :return:
         """
         getter = ProxyGetter()
         while True:
-            print('开始抓取代理')
+            print('开始抓取代理~')
             getter.run()
             time.sleep(20)
 
@@ -45,13 +44,13 @@ class Scheduler(object):
 
         print('代理池开始运行')
         if TESTER_ENABLE:
-            tester_process = Process(target=self.schedule_tester())
+            tester_process = Process(target=self.schedule_tester)
             tester_process.start()
 
         if GETTER_ENABLE:
-            getter_process = Process(target=self.schedule_getter())
+            getter_process = Process(target=self.schedule_getter)
             getter_process.start()
 
         if API_ENABLE:
-            api_process = Process(target=self.schedule_api())
+            api_process = Process(target=self.schedule_api)
             api_process.start()
