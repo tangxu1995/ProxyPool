@@ -27,7 +27,6 @@ class ProxyCrawler(object, metaclass=ProxyMetaclass):
         return proxies
 
     def Proxy_Xici(self):
-        print('这是来自西刺的代理~')
         for page in range(1, 3):
             url = 'https://www.xicidaili.com/nn/{}'.format(page)
             headers = {
@@ -44,7 +43,6 @@ class ProxyCrawler(object, metaclass=ProxyMetaclass):
                         print(e)
 
     def Proxy_Data5u(self):
-        print('这是来自data5u的代理~')
         url = 'http://www.data5u.com/free/gngn/index.shtml'
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
