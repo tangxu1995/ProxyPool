@@ -58,13 +58,6 @@ class CheckProxy(object):
                 tasks = [self.test_single_proxy(proxy) for proxy in test_proxies]
                 loop.run_until_complete(asyncio.wait(tasks))
                 time.sleep(5)
-            # proxies = self.redis.all()
-            # loop = asyncio.get_event_loop()
-            # for i in range(0, len(proxies), BATCH_TEST_SIZE):
-            #     test_proxies = proxies[i:i + BATCH_TEST_SIZE]
-            #     tasks = [self.test_single_proxy(proxy) for proxy in test_proxies]
-            #     loop.run_until_complete(asyncio.wait(tasks))
-            #     time.sleep(5)
         except Exception as e:
             print('测试发生错误', e.args)
 
