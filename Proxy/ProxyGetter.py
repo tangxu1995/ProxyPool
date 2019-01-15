@@ -22,14 +22,15 @@ class ProxyGetter(object):
             return False
 
     def run(self):
-        print('开始抓取代理~')
+        print('获取器开始执行')
         if not self.is_over_threshold():
             for callback_label in range(self.crawler.__CrawlFuncCount__):
                 callback = self.crawler.__CrawlFunc__[callback_label]
-                proxies = self.crawler.get_proxis(callback)
+                # 获取代理
+                proxies = self.crawler.get_proxies(callback)
                 for proxy in proxies:
                     if self.redis.add(proxy):
-                        print('代理添加成功: %s' % proxy)
+                        print('代理 %s 添加成功' % proxy)
 
     def count1(self):
         return self.redis.count()

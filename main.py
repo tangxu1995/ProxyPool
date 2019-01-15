@@ -2,5 +2,14 @@ from Util.Scheduler import Scheduler
 
 __author__ = 'tangxu'
 
-scheduler = Scheduler()
-scheduler.run()
+
+def main():
+    try:
+        scheduler = Scheduler()
+        scheduler.run()
+    except:
+        main()
+
+
+if __name__ == '__main__':
+    main()
