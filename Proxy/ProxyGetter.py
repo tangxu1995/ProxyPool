@@ -22,8 +22,8 @@ class ProxyGetter(object):
             return False
 
     def run(self):
-        print('获取器开始执行')
         if not self.is_over_threshold():
+            print('获取器开始执行')
             for callback_label in range(self.crawler.__CrawlFuncCount__):
                 callback = self.crawler.__CrawlFunc__[callback_label]
                 # 获取代理

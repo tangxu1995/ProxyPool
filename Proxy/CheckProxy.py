@@ -32,11 +32,10 @@ class CheckProxy(object):
                 async with session.get(TEST_URL, proxy=real_proxy, timeout=15) as response:
                     if response.status in VALID_STATUS_CODES:
                         self.redis.max(proxy)
-                        print('代理可用', proxy)
                     else:
                         self.redis.decrease(proxy)
                         print('状态码不合法', proxy)
-            except (ClientError, ClientConnectorError, TimeoutError, AttributeError):
+            except (ClientError, aiohttp.ClientConnectorError, asyncio.TimeoutError, AttributeError):
                 self.redis.decrease(proxy)
                 print('代理请求失败', proxy)
 

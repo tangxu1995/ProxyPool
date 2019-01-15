@@ -29,7 +29,6 @@ class Scheduler(object):
         """
         getter = ProxyGetter()
         while True:
-            print('开始抓取代理~')
             getter.run()
             time.sleep(20)
 
