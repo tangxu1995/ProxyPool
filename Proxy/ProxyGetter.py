@@ -1,7 +1,7 @@
 from Db.RedisClient import RedisClient
 from Proxy.ProxyCrawler import ProxyCrawler
 
-POOL_UPPER_THRESHOLD = 2500
+POOL_UPPER_THRESHOLD = 50000
 
 __author__ = 'tangxu'
 
