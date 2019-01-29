@@ -1,4 +1,5 @@
 # ProxyPool/Proxy/ProxyCrawler.py
+import re
 import requests
 from lxml import etree
 
@@ -56,3 +57,36 @@ class ProxyCrawler(object, metaclass=ProxyMetaclass):
                     yield ':'.join(ul.xpath(".//li/text()")[0:2])
                 except Exception as e:
                     print(e)
+
+    def Proxy_Xila(self):
+        for page in range(1, 4):
+            url = 'http://www.xiladaili.com/gaoni/{}'.format(page)
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
+            }
+            response = requests.get(url, headers=headers)
+            if response.status_code == 200:
+                items = re.findall('(\d+.\d+.\d+.\d+:\d+)', response.text)
+                for item in items:
+                    try:
+                        yield item
+                    except Exception as e:
+                        print(e)
+
+    def Proxy_31daili(self):
+        url_list = ['https://31f.cn/http-proxy/', 'https://31f.cn/https-proxy/']
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
+        }
+        for url in url_list:
+            response = requests.get(url, headers=headers)
+            if response.status_code == 200:
+                tree = etree.HTML(response.text)
+                items = tree.xpath("//table//tr")[1:51]
+                for item in items:
+                    try:
+                        ip = item.xpath(".//td[2]/text()")[0]
+                        port = item.xpath(".//td[3]/text()")[0]
+                        yield ip + ":" + port
+                    except Exception as e:
+                        print(e)
