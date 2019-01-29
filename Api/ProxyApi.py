@@ -1,4 +1,4 @@
-from flask import Flask, g
+from flask import Flask, g, render_template
 from Db.RedisClient import RedisClient
 
 app = Flask(__name__)
@@ -13,7 +13,7 @@ def get_conn():
 
 @app.route('/')
 def index():
-    return '<h2>Welcome to Proxy Pool System</h2>'
+    return render_template('index.html')
 
 
 @app.route('/random')
