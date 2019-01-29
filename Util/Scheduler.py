@@ -37,7 +37,7 @@ class Scheduler(object):
         开启 API
         :return:
         """
-        app.run()
+        app.run('0.0.0.0', '5000')
 
     def run(self):
 
