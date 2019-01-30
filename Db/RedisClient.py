@@ -94,6 +94,12 @@ class RedisClient():
             else:
                 print('代理池为空')
 
+    def delete(self, proxy):
+        """
+        删除指定代理
+        :return:
+        """
+        return self.db.zrem(REDIS_KEY, proxy)
 
     def batch(self, start, stop):
         """
@@ -101,6 +107,7 @@ class RedisClient():
         :return:
         """
         return self.db.zrevrange(REDIS_KEY, start, stop - 1)
+
 
 if __name__ == '__main__':
     redis = RedisClient()

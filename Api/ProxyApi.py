@@ -1,4 +1,4 @@
-from flask import Flask, g, jsonify
+from flask import Flask, g, jsonify, request
 from Db.RedisClient import RedisClient
 from werkzeug.wrappers import Response
 
@@ -41,6 +41,16 @@ def get_proxy():
     conn = get_conn()
     return conn.random()
 
+@app.route('/delete', methods=['GET'])
+def delete_proxy():
+    """
+    删除指定代理
+    :return:
+    """
+    conn = get_conn()
+    proxy = request.args.get('proxy')
+    conn.delete(proxy)
+    return 'delete proxy:{} success!'.format(proxy)
 
 @app.route('/count')
 def get_counts():
