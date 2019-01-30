@@ -1,5 +1,7 @@
-from flask import Flask, g, render_template
+from flask import Flask, g, jsonify
 from Db.RedisClient import RedisClient
+from werkzeug.wrappers import Response
+
 
 app = Flask(__name__)
 
@@ -11,10 +13,24 @@ def get_conn():
     return g.redis
 
 
+class JsonResponse(Response):
+    @classmethod
+    def force_type(cls, response, environ=None):
+        if isinstance(response, (dict, list)):
+            response = jsonify(response)
+
+        return super(JsonResponse, cls).force_type(response, environ)
+
+app.response_class = JsonResponse
+
+api_list = {
+    'get': u'Get a random proxy',
+    'count': u'Get the numbers of proxies'
+}
+
 @app.route('/')
 def index():
-    return render_template('index.html')
-
+    return api_list
 
 @app.route('/random')
 def get_proxy():
